@@ -393,8 +393,10 @@ function startListening(){
 }
 
 function refreshAll(){
+  if(!ME) return;
   updateHeader();
-  const tab = document.querySelector('.tab.on')?.dataset?.tab||'feed';
+  const activeTab = document.querySelector('.tab.on');
+  const tab = activeTab?.dataset?.tab||'feed';
   if(tab==='feed') renderFeed();
   if(tab==='cal')  renderCal();
   if(tab==='my')   renderMyList();
@@ -447,8 +449,12 @@ function enterApp(){
   document.getElementById('meName').textContent=ME.name;
   const av=document.getElementById('meAv');
   av.textContent=ME.name[0];av.style.background=ME.color;
+  document.querySelectorAll('.tab-content').forEach(t=>t.style.display='none');
+  document.getElementById('tab-feed').style.display='block';
+  document.querySelectorAll('.tab').forEach(b=>b.classList.remove('on'));
+  document.querySelectorAll('.tab')[0].classList.add('on');
+  document.querySelectorAll('.tab')[0].dataset.tab='feed';
   startListening();
-  showTab('feed',document.querySelectorAll('.tab')[0]);
 }
 
 async function loadExisting(){
