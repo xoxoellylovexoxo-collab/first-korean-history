@@ -491,7 +491,7 @@ function updateHeader(){
 function showTab(name,el){
   document.querySelectorAll('.tab-content').forEach(t=>t.style.display='none');
   document.querySelectorAll('.tab').forEach(b=>b.classList.remove('on'));
-  document.getElementById('tab-'+name).style.display='';
+  document.getElementById('tab-'+name).style.display='block';
   el.classList.add('on');
   el.dataset.tab=name;
   if(name==='feed')renderFeed();
